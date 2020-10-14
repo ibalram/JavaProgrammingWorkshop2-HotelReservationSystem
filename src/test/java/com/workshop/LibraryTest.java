@@ -10,8 +10,5 @@ import com.workshop.Executor;
 import static org.junit.Assert.*;
 
 public class LibraryTest {
-    @Test public void testSomeLibraryMethod() {
-        Executor classUnderTest = new Executor();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
-    }
+	
 }
