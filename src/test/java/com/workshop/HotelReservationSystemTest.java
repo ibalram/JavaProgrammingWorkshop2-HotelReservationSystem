@@ -41,4 +41,11 @@ public class HotelReservationSystemTest {
 		assertEquals("Ridgewood, Rating: 5 and Total Rates: $140",
 				obj.getCheapestBestRatedHotel("11Sep2020", "12Sep2020", "Reward").toString());
 	}
+	
+	@Test
+	public void testGetCheapestHotelForDateRangeWithWeekendsWithBestRatingRegularCustomer() {
+		HotelReservationSystem obj = new HotelReservationSystem();
+		assertEquals("Bridgewood, Rating: 4 and Total Rates: $200",
+				obj.getCheapestBestRatedHotel("11Sep2020", "12Sep2020", "Regular").toString());
+	}
 }
