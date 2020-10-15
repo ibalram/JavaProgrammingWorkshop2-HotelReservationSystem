@@ -3,6 +3,7 @@ package com.workshop.model;
 public class Hotel {
 	private String name;
 	private int regularRate;
+	private long totalRates;
 
 	public Hotel() {
 	}
@@ -26,5 +27,14 @@ public class Hotel {
 
 	public void setRegularRate(int rate) {
 		this.regularRate = rate;
+	}
+	
+	public long calculateTotalRates(long days) {
+		this.totalRates = days*regularRate;
+		return totalRates;
+	}
+
+	public String toString() {
+		return name + ", Total Rates: $" + totalRates;
 	}
 }
