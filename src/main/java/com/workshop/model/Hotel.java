@@ -39,6 +39,14 @@ public class Hotel {
 		this.regularWeekendRate = regularWeekendRate;
 	}
 
+	public long getTotalRates() {
+		return totalRates;
+	}
+
+	public void setTotalRates(long totalRates) {
+		this.totalRates = totalRates;
+	}
+
 	public long calculateTotalRates(long weekDays, long weekEnds) {
 		this.totalRates = weekDays * regularWeekdayRate + weekEnds * regularWeekendRate;
 		return totalRates;
