@@ -12,13 +12,7 @@ public class Executor {
 		System.out.println("----------------------------------");
 
 		HotelReservationSystem hotelSystem = new HotelReservationSystem();
-		hotelSystem.addHotel(new Hotel("Lakewood", 110));
-		hotelSystem.addHotel(new Hotel("Bridgewood", 160));
-		hotelSystem.addHotel(new Hotel("Ridgewood", 220));
-		System.out.println("Hotels are added");
 
-		// HotelReservationSystemService service = new
-		// HotelReservationSystemService(sc);
 		boolean repeat = true;
 		while (repeat) {
 			System.out.println("Select Options:\n1 (get cheapest hotel for date range)\n2 (EXIT)");

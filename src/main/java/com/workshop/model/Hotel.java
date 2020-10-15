@@ -2,15 +2,17 @@ package com.workshop.model;
 
 public class Hotel {
 	private String name;
-	private int regularRate;
+	private int regularWeekdayRate;
+	private int regularWeekendRate;
 	private long totalRates;
 
 	public Hotel() {
 	}
 
-	public Hotel(String name, int regularRate) {
+	public Hotel(String name, int regularWeekdayRate, int regularWeekendRate) {
 		this.name = name;
-		this.regularRate = regularRate;
+		this.regularWeekdayRate = regularWeekdayRate;
+		this.regularWeekendRate = regularWeekendRate;
 	}
 
 	public String getName() {
@@ -21,16 +23,24 @@ public class Hotel {
 		this.name = name;
 	}
 
-	public int getRegularRate() {
-		return regularRate;
+	public int getRegularWeekdayRate() {
+		return regularWeekdayRate;
 	}
 
-	public void setRegularRate(int rate) {
-		this.regularRate = rate;
+	public void setRegularWeekdayRate(int regularWeekdayRate) {
+		this.regularWeekdayRate = regularWeekdayRate;
 	}
-	
-	public long calculateTotalRates(long days) {
-		this.totalRates = days*regularRate;
+
+	public int getRegularWeekendRate() {
+		return regularWeekendRate;
+	}
+
+	public void setRegularWeekendRate(int regularWeekendRate) {
+		this.regularWeekendRate = regularWeekendRate;
+	}
+
+	public long calculateTotalRates(long weekDays, long weekEnds) {
+		this.totalRates = weekDays * regularWeekdayRate + weekEnds * regularWeekendRate;
 		return totalRates;
 	}
 
