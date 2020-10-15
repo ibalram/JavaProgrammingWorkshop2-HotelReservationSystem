@@ -52,8 +52,44 @@ public class HotelReservationSystem {
 			long weekDays = getWeekDays(checkin, checkout);
 			long weekEnds = days - weekDays;
 			return hotelList.stream()
+					.sorted(Comparator.comparingLong(hotel -> ((Hotel) hotel).calculateTotalRates(weekDays, weekEnds)))
+					.findFirst().orElse(null);
+
+		} catch (Exception e) {
+			System.out.println("Exception Occured" + e);
+			return null;
+		}
+	}
+
+	public Hotel getCheapestBestRatedHotel(String checkinDate, String checkoutDate) {
+		try {
+			Date checkin = date.parse(checkinDate);
+			Date checkout = date.parse(checkoutDate);
+			long days = (long) ((checkout.getTime() - checkin.getTime()) / (86.4e6)) + 1;
+			long weekDays = getWeekDays(checkin, checkout);
+			long weekEnds = days - weekDays;
+			return hotelList.stream()
 					.sorted(Comparator.comparingLong(hotel -> ((Hotel) hotel).calculateTotalRates(weekDays, weekEnds))
 							.thenComparing(Comparator.comparingLong(hotel -> -((Hotel) hotel).getRating())))
+					.findFirst().orElse(null);
+
+		} catch (Exception e) {
+			System.out.println("Exception Occured" + e);
+			return null;
+		}
+	}
+
+	public Hotel getBestRatedHotel(String checkinDate, String checkoutDate) {
+		try {
+			Date checkin = date.parse(checkinDate);
+			Date checkout = date.parse(checkoutDate);
+			long days = (long) ((checkout.getTime() - checkin.getTime()) / (86.4e6)) + 1;
+			long weekDays = getWeekDays(checkin, checkout);
+			long weekEnds = days - weekDays;
+			for (Hotel hotel : hotelList) {
+				hotel.calculateTotalRates(weekDays, weekEnds);
+			}
+			return hotelList.stream().sorted(Comparator.comparingLong(hotel -> -((Hotel) hotel).getRating()))
 					.findFirst().orElse(null);
 
 		} catch (Exception e) {
