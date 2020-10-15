@@ -52,7 +52,8 @@ public class HotelReservationSystem {
 			long weekDays = getWeekDays(checkin, checkout);
 			long weekEnds = days - weekDays;
 			return hotelList.stream()
-					.sorted(Comparator.comparingLong(hotel -> ((Hotel) hotel).calculateTotalRates(weekDays, weekEnds)))
+					.sorted(Comparator.comparingLong(hotel -> ((Hotel) hotel).calculateTotalRates(weekDays, weekEnds))
+							.thenComparing(Comparator.comparingLong(hotel -> -((Hotel) hotel).getRating())))
 					.findFirst().orElse(null);
 
 		} catch (Exception e) {

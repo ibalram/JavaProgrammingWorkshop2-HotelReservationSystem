@@ -14,8 +14,8 @@ public class HotelReservationSystemTest {
 	}
 	
 	@Test
-	public void testGetCheapestHotelForDateRangeWithWeekends() {
+	public void testGetCheapestHotelForDateRangeWithWeekendsWithBestRating() {
 		HotelReservationSystem obj  = new HotelReservationSystem();
-		assertEquals("Lakewood, Total Rates: $200", obj.getCheapestHotel("11Sep2020", "12Sep2020").toString());
+		assertEquals("Bridgewood, Total Rates: $200", obj.getCheapestHotel("11Sep2020", "12Sep2020").toString());
 	}
 }
