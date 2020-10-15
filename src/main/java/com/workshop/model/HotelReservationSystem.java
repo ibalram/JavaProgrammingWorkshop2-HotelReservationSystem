@@ -9,9 +9,9 @@ public class HotelReservationSystem {
 
 	public HotelReservationSystem() {
 		this.hotelList = new ArrayList<Hotel>();
-		this.addHotel(new Hotel("Lakewood", 110, 90, 3));
-		this.addHotel(new Hotel("Bridgewood", 150, 50, 4));
-		this.addHotel(new Hotel("Ridgewood", 220, 150, 5));
+		this.addHotel(new Hotel("Lakewood", 110, 90, 80, 80, 3));
+		this.addHotel(new Hotel("Bridgewood", 150, 50, 110, 50, 4));
+		this.addHotel(new Hotel("Ridgewood", 220, 150, 100, 40, 5));
 	}
 
 	public void addHotel(Hotel hotel) {
@@ -44,7 +44,7 @@ public class HotelReservationSystem {
 		return workDays;
 	}
 
-	public Hotel getCheapestHotel(String checkinDate, String checkoutDate) {
+	public Hotel getCheapestHotel(String checkinDate, String checkoutDate, String type) {
 		try {
 			Date checkin = date.parse(checkinDate);
 			Date checkout = date.parse(checkoutDate);
@@ -52,16 +52,17 @@ public class HotelReservationSystem {
 			long weekDays = getWeekDays(checkin, checkout);
 			long weekEnds = days - weekDays;
 			return hotelList.stream()
-					.sorted(Comparator.comparingLong(hotel -> ((Hotel) hotel).calculateTotalRates(weekDays, weekEnds)))
+					.sorted(Comparator
+							.comparingLong(hotel -> ((Hotel) hotel).calculateTotalRates(weekDays, weekEnds, type)))
 					.findFirst().orElse(null);
 
 		} catch (Exception e) {
-			System.out.println("Exception Occured" + e);
+			System.out.println("Exception Occured: " + e);
 			return null;
 		}
 	}
 
-	public Hotel getCheapestBestRatedHotel(String checkinDate, String checkoutDate) {
+	public Hotel getCheapestBestRatedHotel(String checkinDate, String checkoutDate, String type) {
 		try {
 			Date checkin = date.parse(checkinDate);
 			Date checkout = date.parse(checkoutDate);
@@ -69,17 +70,18 @@ public class HotelReservationSystem {
 			long weekDays = getWeekDays(checkin, checkout);
 			long weekEnds = days - weekDays;
 			return hotelList.stream()
-					.sorted(Comparator.comparingLong(hotel -> ((Hotel) hotel).calculateTotalRates(weekDays, weekEnds))
+					.sorted(Comparator
+							.comparingLong(hotel -> ((Hotel) hotel).calculateTotalRates(weekDays, weekEnds, type))
 							.thenComparing(Comparator.comparingLong(hotel -> -((Hotel) hotel).getRating())))
 					.findFirst().orElse(null);
 
 		} catch (Exception e) {
-			System.out.println("Exception Occured" + e);
+			System.out.println("Exception Occured: " + e);
 			return null;
 		}
 	}
 
-	public Hotel getBestRatedHotel(String checkinDate, String checkoutDate) {
+	public Hotel getBestRatedHotel(String checkinDate, String checkoutDate, String type) {
 		try {
 			Date checkin = date.parse(checkinDate);
 			Date checkout = date.parse(checkoutDate);
@@ -87,13 +89,13 @@ public class HotelReservationSystem {
 			long weekDays = getWeekDays(checkin, checkout);
 			long weekEnds = days - weekDays;
 			for (Hotel hotel : hotelList) {
-				hotel.calculateTotalRates(weekDays, weekEnds);
+				hotel.calculateTotalRates(weekDays, weekEnds, type);
 			}
 			return hotelList.stream().sorted(Comparator.comparingLong(hotel -> -((Hotel) hotel).getRating()))
 					.findFirst().orElse(null);
 
 		} catch (Exception e) {
-			System.out.println("Exception Occured" + e);
+			System.out.println("Exception Occured: " + e);
 			return null;
 		}
 	}
