@@ -44,37 +44,11 @@ public class Executor {
 
 	public static void getCheapestHotelForDateRange(Scanner sc, HotelReservationSystem hotelSystem) {
 		System.out.println("Enter the checkin date (ddMMMyyyy): ");
-		String checkinDate;
-		while (true) {
-			checkinDate = sc.nextLine();
-			try {
-				date.parse(checkinDate);
-				break;
-			} catch (Exception e) {
-				System.out.println("Enter a valid date (ddMMMyyyy): " + e);
-			}
-		}
-
+		String checkinDate = getDateInput(sc);
 		System.out.println("Enter the checkout date (ddMMMyyyy): ");
-		String checkoutDate;
-		while (true) {
-			checkoutDate = sc.nextLine();
-			try {
-				date.parse(checkoutDate);
-				break;
-			} catch (Exception e) {
-				System.out.println("Enter a valid date (ddMMMyyyy): " + e);
-			}
-		}
-
-		System.out.println("Enter the customer type (ddMMMyyyy): ");
-		String type;
-		while (true) {
-			type = sc.nextLine();
-			if (validateCustomer(type))
-				break;
-			System.out.println("Enter valid customer type");
-		}
+		String checkoutDate = getDateInput(sc);
+		System.out.println("Enter the customer type (reward or regular): ");
+		String type = getCustomerTypeInput(sc);
 
 		Hotel cheapestHotel = hotelSystem.getCheapestHotel(checkinDate, checkoutDate, type);
 		System.out.println("Cheapest hotel for given date range is: " + cheapestHotel);
@@ -82,37 +56,11 @@ public class Executor {
 
 	public static void getCheapestBestRatedHotelForDateRange(Scanner sc, HotelReservationSystem hotelSystem) {
 		System.out.println("Enter the checkin date (ddMMMyyyy): ");
-		String checkinDate;
-		while (true) {
-			checkinDate = sc.nextLine();
-			try {
-				date.parse(checkinDate);
-				break;
-			} catch (Exception e) {
-				System.out.println("Enter a valid date (ddMMMyyyy): " + e);
-			}
-		}
-
+		String checkinDate = getDateInput(sc);
 		System.out.println("Enter the checkout date (ddMMMyyyy): ");
-		String checkoutDate;
-		while (true) {
-			checkoutDate = sc.nextLine();
-			try {
-				date.parse(checkoutDate);
-				break;
-			} catch (Exception e) {
-				System.out.println("Enter a valid date (ddMMMyyyy): " + e);
-			}
-		}
-
-		System.out.println("Enter the customer type (ddMMMyyyy): ");
-		String type;
-		while (true) {
-			type = sc.nextLine();
-			if (validateCustomer(type))
-				break;
-			System.out.println("Enter valid customer type");
-		}
+		String checkoutDate = getDateInput(sc);
+		System.out.println("Enter the customer type (reward or regular): ");
+		String type = getCustomerTypeInput(sc);
 
 		Hotel cheapestHotel = hotelSystem.getCheapestBestRatedHotel(checkinDate, checkoutDate, type);
 		System.out.println("Cheapest hotel for given date range is: " + cheapestHotel);
@@ -120,30 +68,31 @@ public class Executor {
 
 	public static void getBestRatedHotelForDateRange(Scanner sc, HotelReservationSystem hotelSystem) {
 		System.out.println("Enter the checkin date (ddMMMyyyy): ");
-		String checkinDate;
-		while (true) {
-			checkinDate = sc.nextLine();
-			try {
-				date.parse(checkinDate);
-				break;
-			} catch (Exception e) {
-				System.out.println("Enter a valid date (ddMMMyyyy): " + e);
-			}
-		}
-
+		String checkinDate = getDateInput(sc);
 		System.out.println("Enter the checkout date (ddMMMyyyy): ");
-		String checkoutDate;
+		String checkoutDate = getDateInput(sc);
+		System.out.println("Enter the customer type (reward or regular): ");
+		String type = getCustomerTypeInput(sc);
+
+		Hotel cheapestHotel = hotelSystem.getBestRatedHotel(checkinDate, checkoutDate, type);
+		System.out.println("Cheapest hotel for given date range is: " + cheapestHotel);
+	}
+
+	public static String getDateInput(Scanner sc) {
+		String dateString;
 		while (true) {
-			checkoutDate = sc.nextLine();
+			dateString = sc.nextLine();
 			try {
-				date.parse(checkoutDate);
+				date.parse(dateString);
 				break;
 			} catch (Exception e) {
 				System.out.println("Enter a valid date (ddMMMyyyy): " + e);
 			}
 		}
+		return dateString;
+	}
 
-		System.out.println("Enter the customer type (ddMMMyyyy): ");
+	public static String getCustomerTypeInput(Scanner sc) {
 		String type;
 		while (true) {
 			type = sc.nextLine();
@@ -151,9 +100,7 @@ public class Executor {
 				break;
 			System.out.println("Enter valid customer type");
 		}
-
-		Hotel cheapestHotel = hotelSystem.getBestRatedHotel(checkinDate, checkoutDate, type);
-		System.out.println("Cheapest hotel for given date range is: " + cheapestHotel);
+		return type;
 	}
 
 	public static boolean validateCustomer(String type) {
